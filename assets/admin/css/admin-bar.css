@@ -1,0 +1,11 @@
+body .notice-lms-go-to-pages {
+    display: none !important;
+}
+
+.theme-browser .themes .notice-warning.notice-alt {
+    display: none !important;
+}
+
+#bookly-js-notification-list #bookly-dt-1, #bookly-js-notification-list label[for="bookly-dt-1"] {
+    display: none !important;
+}
