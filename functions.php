@@ -9,7 +9,7 @@ function theme_enqueue_styles() {
     $ajaxurl = admin_url( 'admin-ajax.php' );
     global $wp_locale;
     // Theme main stylesheet
-    wp_enqueue_style( 'theme-style', get_stylesheet_uri(), null, 1.5, 'all' );
+    wp_enqueue_style( 'theme-style', get_stylesheet_uri(), null, 1.6, 'all' );
     wp_enqueue_style( 'select2-gld', 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css', null, STM_THEME_VERSION, 'all' );
 
     $path_bookly = WP_PLUGIN_URL . '/bookly-responsive-appointment-booking-tool';

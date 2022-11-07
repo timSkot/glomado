@@ -618,3 +618,26 @@ body.skin_custom_color .woocommerce .cart-totals_wrap .shipping-calculator-butto
 .gamipress_content.active {
     display: block;
 }
+
+.stm-lms-buy-buttons .stm_lms_mixed_button__list.has-course {
+    visibility: visible;
+    position: relative;
+    opacity: 1;
+    box-shadow: none;
+    top: unset;
+    padding: 0;
+}
+
+.stm-lms-buy-buttons .stm_lms_mixed_button__list.has-course button {
+    border-radius: 10px !important;
+}
+
+.stm-lms-buy-buttons .stm_lms_mixed_button__list.has-course button:hover {
+    background-color: #2fbe5b !important;
+}
+
+.stm-lms-buy-buttons .stm_lms_mixed_button__list.has-course span {
+    color: #fff !important;
+    font-weight: 600;
+    text-transform: uppercase;
+}

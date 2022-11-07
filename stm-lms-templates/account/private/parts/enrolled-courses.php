@@ -118,7 +118,7 @@ stm_lms_register_style( 'expiration/main' );
 
                         <div class="stm_lms_instructor_courses__single--enroll">
                             <a v-bind:href="course.link" class="btn btn-default">
-                                <span><?php esc_html_e( 'UNBOOKED workshop', 'masterstudy-lms-learning-management-system' ); ?></span>
+                                <span><?php esc_html_e( 'Go to workshop', 'masterstudy-lms-learning-management-system' ); ?></span>
                             </a>
                         </div>
 

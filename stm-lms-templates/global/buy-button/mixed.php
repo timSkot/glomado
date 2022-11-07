@@ -44,13 +44,21 @@ if($service) {
 
 <div class="stm-lms-buy-buttons stm-lms-buy-buttons-mixed stm-lms-buy-buttons-mixed-pro">
     <div class="stm_lms_mixed_button subscription_enabled">
+        <?php if(!$has_course): ?>
         <div class="buy-button btn btn-default btn_big heading_font">
             <span> <?php esc_html_e( 'Book Workshop', 'masterstudy-child' ); ?> </span>
         </div>
+        <?php else: ?>
+        <div class="stm_lms_mixed_button__list has-course">
+            <button class="btn btn-default btn_big heading_font" data-course="<?php echo $course_id; ?>" data-purchased="<?php echo $has_course; ?>" data-learners="<?php echo intval($service->getPrice());?>" data-learners-label="Individual">
+              <span><?php esc_html_e( 'Book Workshop', 'masterstudy-child' ); ?></span>
+            </button>
+        </div>
+        <?php endif; ?>
         <?php if($service): ?>
         <div class="stm_lms_mixed_button__list">
-            <button data-course="<?php echo $course_id; ?>" data-purchased="<?php echo $has_course; ?>" data-learners="<?php echo intval($service->getPrice());?>" data-learners-label="Individual"><span><?php esc_html_e('Individual', 'masterstudy-child'); ?><span class="price"><?php echo $price_individual; ?></span></span></button>
             <?php if(!$has_course): ?>
+                <button data-course="<?php echo $course_id; ?>" data-purchased="<?php echo $has_course; ?>" data-learners="<?php echo intval($service->getPrice());?>" data-learners-label="Individual"><span><?php esc_html_e('Individual', 'masterstudy-child'); ?><span class="price"><?php echo $price_individual; ?></span></span></button>
                 <button data-course="<?php echo $course_id; ?>" data-purchased="<?php echo $has_course; ?>" data-learners="<?php echo intval($service->getPriceSmallGroup());?>" data-learners-label="Small Group"><span><?php esc_html_e('Small Group (2 - 5)', 'masterstudy-child'); ?><span class="price"><?php echo $price_small_group; ?></span></span></button>
                 <button data-course="<?php echo $course_id; ?>" data-purchased="<?php echo $has_course; ?>" data-learners="<?php echo intval($service->getPriceLargeGroup());?>" data-learners-label="Large Group"><span><?php esc_html_e('Large Group (6 - 30)', 'masterstudy-child'); ?><span class="price"><?php echo $price_large_group; ?></span></span></button>
             <?php endif; ?>
