@@ -64,6 +64,7 @@ function so_payment_complete( $order_id ){
 
         $appointment_data = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}bookly_appointments WHERE id = {$appointment_id}", OBJECT );
         $zoom_data = json_decode($appointment_data[0]->online_meeting_data, true);
+        $additional_persons = json_decode($appointment_data[0]->additional_persons, true);
         $start_url = null;
         $service_name = null;
         if($zoom_data) {
@@ -76,7 +77,7 @@ function so_payment_complete( $order_id ){
 
         $customer_data = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}bookly_customers WHERE id = {$customer_id}", OBJECT );
 
-        $notification = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}bookly_notifications WHERE id = 1", OBJECT );
+        $notification = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}bookly_notifications WHERE id = 104", OBJECT );
 
         $d=strtotime($appointment_data[0]->start_date);
 
@@ -95,6 +96,18 @@ function so_payment_complete( $order_id ){
         $replace = [$customer_name, $service_name, $company_address, $appointment_date, $appointment_time, $start_url, $company_name, $company_phone, $company_website];
 
         $notification_message = str_replace($search, $replace, $notification_message);
+
+        if(!empty($additional_persons)){
+          foreach ($additional_persons as $person) {
+            if($person['email']) {
+              $customer_name = $person['first_name'];
+              $replace_persons = [$customer_name, $service_name, $company_address, $appointment_date, $appointment_time, $start_url, $company_name, $company_phone, $company_website];
+              $search_persons = ["{client_name}", "{service_name}", "{company_address}", "{appointment_date}", "{appointment_time}", "{online_meeting_start_url}", "{company_name}", "{company_phone}", "{company_website}"];
+              $notification_message_persons = str_replace($search_persons, $replace_persons, $notification[0]->message);
+              wp_mail( $person['email'], $notification_subject, $notification_message_persons );
+            }
+          }
+        }
 
         wp_mail( $customer_email, $notification_subject, $notification_message );
       }
