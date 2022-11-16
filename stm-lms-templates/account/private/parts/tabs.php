@@ -51,6 +51,9 @@ if ( ! empty( $sub_items ) ) {
             if ( 'dynamic_menu_item' !== $item_type ) {
                 continue;
             }
+            if($menu_item['id'] === 'bundles' && !current_user_can( 'administrator' )):
+                continue;
+            endif;
             STM_LMS_Templates::show_lms_template( "account/float_menu/menu_items/{$item_type}", $menu_item );
         }
         ?>

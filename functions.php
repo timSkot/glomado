@@ -31,7 +31,7 @@ function theme_enqueue_styles() {
     wp_enqueue_script('bookly-jquery.hammer.min.js', $path_bookly . '/frontend/resources/js/jquery.hammer.min.js', null, STM_THEME_VERSION, true);
     wp_enqueue_script('bookly-picker.js', $path_bookly . '/frontend/resources/js/picker.js', null, STM_THEME_VERSION, true);
     wp_enqueue_script('bookly-picker.date.js', $path_bookly . '/frontend/resources/js/picker.date.js', null, STM_THEME_VERSION, true);
-    wp_enqueue_script('bookly-bookly.min.js', $path_bookly . '/frontend/resources/js/bookly.min.js', null, STM_THEME_VERSION, true);
+    wp_enqueue_script('bookly-bookly.min.js', $path_bookly . '/frontend/resources/js/bookly.min.js', null, 2.6, true);
     wp_localize_script( 'bookly-bookly.min.js', 'BooklyL10n', array(
         'ajaxurl' => $ajaxurl,
         'csrf_token' => Common::getCsrfToken(),
