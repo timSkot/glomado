@@ -641,3 +641,7 @@ body.skin_custom_color .woocommerce .cart-totals_wrap .shipping-calculator-butto
     font-weight: 600;
     text-transform: uppercase;
 }
+
+.single_product_after_title .stm_lms_teachers {
+    display: none !important;
+}
