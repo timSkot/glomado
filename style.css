@@ -5,7 +5,7 @@
 	Author: StylemixThemes
 	Author URI: http://stylemix.net
 	Template: masterstudy
-	Version: 2.3
+	Version: 2.6
 	License: GNU General Public License v2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 	Tags: classes, courses, education, education center, learning center, tutoring, teaching, study, studying, learning, lessons, instructor, teacher, mentor
@@ -513,15 +513,24 @@ body.skin_custom_color .woocommerce .cart-totals_wrap .shipping-calculator-butto
 }
 
 .mass-upload {
-    padding-right: 25px;
+    padding-right: 15px;
     position: relative;
+    display: flex;
 }
 
-.mass-upload .tooltip-mass {
-    position: absolute;
-    top: 25px;
-    right: 0;
+.mass-upload .tooltip-mass .button {
+    display: block;
+    background-color: #195ec8;
+    padding: 0.5rem;
+    font-family: sans-serif;
+    border-radius: 0.3rem;
     cursor: pointer;
+    text-transform: none;
+    font-size: 14px;
+    font-weight: 400;
+    width: max-content;
+    margin-top: 1rem;
+    margin-left: 1rem;
 }
 
 .tooltip-mass_content {
@@ -644,4 +653,28 @@ body.skin_custom_color .woocommerce .cart-totals_wrap .shipping-calculator-butto
 
 .single_product_after_title .stm_lms_teachers {
     display: none !important;
+}
+
+#bookly-tbs.bookly-customer-cabinet .page-link {
+    color: #c74769;
+}
+
+#bookly-tbs.bookly-customer-cabinet .page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #c74769;
+    border-color: #c74769;
+}
+
+@media (max-width: 767px) {
+    .bookly-details-person-btns {
+        display: block;
+    }
+    .mass-upload {
+        display: block;
+        padding-right: 0;
+    }
+    .mass-upload .tooltip-mass .button {
+        margin-left: 0;
+    }
 }

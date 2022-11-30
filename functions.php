@@ -3,13 +3,15 @@
 use Bookly\Lib\Base\Installer;
 use Bookly\Lib\Entities\Customer;
 use Bookly\Lib\Utils\Common;
+use Bookly\Lib as BooklyLib;
+use Bookly\Backend\Modules as BooklyModules;
 
 add_action( 'wp_enqueue_scripts', 'theme_enqueue_styles' );
 function theme_enqueue_styles() {
     $ajaxurl = admin_url( 'admin-ajax.php' );
     global $wp_locale;
     // Theme main stylesheet
-    wp_enqueue_style( 'theme-style', get_stylesheet_uri(), null, 1.7, 'all' );
+    wp_enqueue_style( 'child-style', get_stylesheet_uri(), null, 1.9, 'all' );
     wp_enqueue_style( 'select2-gld', 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css', null, STM_THEME_VERSION, 'all' );
 
     $path_bookly = WP_PLUGIN_URL . '/bookly-responsive-appointment-booking-tool';
@@ -21,6 +23,7 @@ function theme_enqueue_styles() {
     wp_enqueue_style( 'bookly-bookly-main.css', $path_bookly . '/frontend/resources/css/bookly-main.css', null, STM_THEME_VERSION, 'all' );
 
     wp_enqueue_script('bookly-spin.min.js', $path_bookly . '/frontend/resources/js/spin.min.js', null, STM_THEME_VERSION, true);
+    wp_enqueue_script('customer-cabinet', get_stylesheet_directory_uri() . '/assets/js/customer-cabinet.js', null, STM_THEME_VERSION, true);
     wp_localize_script( 'bookly-spin.min.js', 'BooklyL10nGlobal', array(
         'csrf_token' => Common::getCsrfToken(),
     ) );
@@ -43,6 +46,29 @@ function theme_enqueue_styles() {
         'nextMonth' => __( 'Next month', 'bookly' ),
         'prevMonth' => __( 'Previous month', 'bookly' ),
         'show_more' => __( 'Show more', 'bookly' ),
+    ) );
+    wp_localize_script( 'customer-cabinet', 'BooklyCustomerCabinetL10n', array(
+      'zeroRecords' => __( 'No appointments.', 'bookly' ),
+      'minDate' => 0,
+      'maxDate' => BooklyLib\Config::getMaximumAvailableDaysForBooking(),
+      'datePicker' => BooklyLib\Utils\DateTime::datePickerOptions(),
+      'dateRange' => BooklyLib\Utils\DateTime::dateRangeOptions( array( 'anyTime' => __( 'Any time', 'bookly' ) ) ),
+      'tasks' => array(
+        'enabled' => BooklyLib\Config::tasksActive(),
+        'title' => BooklyModules\Appointments\Proxy\Tasks::getFilterText(),
+      ),
+      'expired_appointment' => __( 'Expired', 'bookly' ),
+      'deny_cancel_appointment' => __( 'Not allowed', 'bookly' ),
+      'cancel' => __( 'Cancel', 'bookly' ),
+      'payment' => __( 'Payment', 'bookly' ),
+      'reschedule' => __( 'Reschedule', 'bookly' ),
+      'noTimeslots' => __( 'There are no time slots for selected date.', 'bookly' ),
+      'profile_update_success' => __( 'Profile updated successfully.', 'bookly' ),
+      'processing' => __( 'Processing...', 'bookly' ),
+      'errors' => array(
+        'cancel' => __( 'Unfortunately, you\'re not able to cancel the appointment because the required time limit prior to canceling has expired.', 'bookly' ),
+        'reschedule' => __( 'The selected time is not available anymore. Please, choose another time slot.', 'bookly' ),
+      ),
     ) );
     wp_enqueue_script('bookly-intlTelInput.min.js', $path_bookly . '/frontend/resources/js/intlTelInput.min.js', null, STM_THEME_VERSION, true);
     wp_enqueue_script('bookly-filter', get_stylesheet_directory_uri() . '/assets/js/bundle_filter.js', null, STM_THEME_VERSION, true);

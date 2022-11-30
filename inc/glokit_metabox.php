@@ -362,3 +362,13 @@ function get_products_glokit_woo() {
         ),
     ) );
 }
+
+add_filter('wpcfto_options_page_setup', function ($setups) {
+  $setups[0]['fields']['section_1']['fields']['how_to_import'] = array(
+    'type'  => 'text',
+    'label' => esc_html__( 'Link to How to Import', 'masterstudy-lms-learning-management-system' ),
+    'value' => '',
+  );
+
+  return $setups;
+}, 999, 1);
